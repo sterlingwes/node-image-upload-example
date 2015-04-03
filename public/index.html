@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Upload Example</title>
+    <script src="/jquery.min.js"></script>
+    <style>
+      html, body { font-family: 'Helvetica Neue', 'Arial', sans-serif; }
+      #status {
+        padding: 5px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status"></div>
+    <input id="myFileInput" type="file" accept="image/*;capture=camera" capture="camera">
+    <script>
+      var cameraFileInput = document.getElementById('myFileInput');
+      var statusMsg = $('#status');
+
+      /*
+       * helper function for setting the status message
+       */
+      function setStatus(message, momentary) {
+        statusMsg.html(message);
+        if(momentary) {
+          // remove the status message after a while
+          setTimeout(function() {
+            statusMsg.html('');
+          },10000 /* 10 seconds, milliseconds */);
+        }
+      }
+
+      /*
+       * this function is run when the value of the file upload field changes
+       */
+      function sendPic() {
+          // let the user know it's uploading
+          setStatus('Uploading...');
+          
+          // prep the file for uploading via an AJAX request
+          var file = cameraFileInput.files[0];
+          var formData = new FormData(); // this is only supported in new browsers
+          formData.append('file', file);
+          
+          $.ajax({
+            url: '/upload',
+            data: formData,
+            method: 'post',
+            
+            // these configs are required to avoid default jQuery functionality
+            // messing with our formData
+            contentType: false,
+            processData: false,
+            
+            // this function is called when the request is successfull
+            success: function(res) {
+              if(res && res.filename) {
+                var linkTag = '<a href="/'+ res.filename +'" target="_blank">View It</a>';
+                setStatus('Uploaded Successfully! ' + linkTag, true);
+              }
+            },
+            
+            error: function() {
+              setStatus('Upload failed, sorry.', true);
+            }
+          })
+      }
+
+      cameraFileInput.addEventListener('change', sendPic, false);
+    </script>
+  </body>
+</html>

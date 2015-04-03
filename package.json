@@ -1,0 +1,24 @@
+{
+  "name": "node-image-upload-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sterlingwes/node-image-upload-example"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sterlingwes/node-image-upload-example/issues"
+  },
+  "homepage": "https://github.com/sterlingwes/node-image-upload-example",
+  "dependencies": {
+    "express": "^4.12.3",
+    "multer": "^0.1.8"
+  }
+}
