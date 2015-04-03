@@ -12,6 +12,8 @@ Run the following terminal commands:
 
 `cd foldername`
 
+`mkdir uploads`
+
 `npm install`
 
 ## Running
