@@ -34,7 +34,7 @@ It should be saved in the `uploads` folder now, and you'll see it by running `ls
 
 With the server running on your desktop, open the link on your phone using your local IP address (your phone will need to be on the same WIFI network).
 
-Find your local IP with `ipconfig getifaddr en1`.
+Find your local IP with `ipconfig getifaddr en0`.
 
 Go to `192.168.XXX.XXX:9000` in your mobile browser (replacing the IP address with your local one).
 
